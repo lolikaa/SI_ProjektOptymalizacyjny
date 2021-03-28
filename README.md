@@ -1,0 +1,2 @@
+# SI_ProjektOptymalizacyjny
+Sztuczna Inteligencja Projekt Optymalizacyjny
