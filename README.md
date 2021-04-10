@@ -10,7 +10,13 @@ Do dyspozycji mamy walizkę, do której mamy spakować swoje rzeczy. Wypełniona
 Do wyboru mamy różne rzeczy o określonej użyteczności oraz wadze. Walizkę chcemy zapakować rzeczami o jak największej użyteczności i o jak najmniejszej masie – tak by zabrać ze sobą jak najwięcej ważnych dla nas przedmiotów.
 
 Elementy służące ocenie:
-Użyteczność – w skali od 1 do 80, gdzie 1 oznacza najmniej użyteczny a 80 niezbędny.
-Waga – podawana w kilogramach.
+Użyteczność – w skali od 1 do 100, gdzie 1 oznacza najmniej użyteczny a 80 niezbędny.
+Waga – podawana w gramach.
+
+Język programowania: 
+--------- javaScript
+Dane:
+--------- zapisywane do pliku csv
+--------- nagłówki: ITEM, DESCRIPTION, WEIGHT [g], USEFULLNESS [1-100]
 
 
