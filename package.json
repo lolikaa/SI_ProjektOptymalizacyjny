@@ -9,6 +9,7 @@
   "author": "Monika",
   "license": "ISC",
   "dependencies": {
+    "csv-parse": "^4.15.4",
     "csv-writer": "^1.6.0",
     "faker": "^5.5.3"
   }

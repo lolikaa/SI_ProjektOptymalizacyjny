@@ -1,9 +1,19 @@
 const faker = require('faker');
 const fs = require('fs');
+const algorytm = require('./algorytm.js');
 
+const path = "data.csv";
+
+
+if(fs.existsSync(path)) {
+    // true
+    algorytm();
+} else { 
+
+    // pola: produkt, opis, waga, uzytecznosc // 
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const csvWriter = createCsvWriter({
-    path: 'data.csv',
+    path: path,
     header: [
         {id: 'item', title: 'ITEM'},
         {id: 'description', title: 'DESCRIPTION'},
@@ -13,8 +23,7 @@ const csvWriter = createCsvWriter({
 });
 
 
-// pola: produkt, opis, waga, uzytecznosc // 
-
+// nazwy do generowania danych //
 const clothes = ['Skirt'
     ,'Bikini'
     ,'Dress pants'
@@ -240,4 +249,6 @@ let records = [];
     csvWriter.writeRecords(records)       // returns a promise
     .then(() => {
         console.log('...Done');
+        algorytm();
     });
+}
