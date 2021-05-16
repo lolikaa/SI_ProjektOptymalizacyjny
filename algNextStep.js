@@ -9,8 +9,6 @@ const algNextStep = () => {
     const maxIteracji = 1000;
     const HMCR = 70; //prawdopodobieństwo wystąpienia w %
    
-    // console.log("długośc HM: " + HM.length);
-    // console.log("długośc FP: " + FP.length);
 
     fs.createReadStream(__dirname + '/data.csv')
         .pipe(parse({ columns: true }, function (err, results) {
@@ -71,7 +69,7 @@ const algNextStep = () => {
                     }
                     tmpFP.push(totalUsefulness);
                 }
-                // TODO
+
                 // po każdej iteracji porównujemy nowe rozwiązanie z istniejącymi
                 for (k=0; k<FP.length; k++) {
                     if(tmpFP[0] > FP[k]) {
@@ -81,6 +79,12 @@ const algNextStep = () => {
                     };
                 }
                 
+            }
+
+            console.log('After second step of algoritm we have: ');
+            for(m=0; m < HM.length; m++) {
+                console.log(`HM[${m}]:  ${HM[m]}`);
+                console.log(`FP[${m}]:  ${FP[m]}`);
             }
         }));
 }

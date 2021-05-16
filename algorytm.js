@@ -32,10 +32,11 @@ fs.createReadStream(__dirname+'/data.csv')
 
             HM.push(tmpHM);
             FP.push(totalUsefulness);
-            // console.log("ostatni wynik: " + HM[i]);
-            // console.log("funkcja przystosowania [suma przydatności]: " + FP[i]);
+            
+            console.log(`HM[${i}]:  ${HM[i]}`);
+            console.log(`FP[${i}]:  ${FP[i]}`);
         }
-
+        console.log("-------------------------------------------------------------------------------");
         algNextStep();
     }));
 }
