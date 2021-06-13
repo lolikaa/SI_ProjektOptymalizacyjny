@@ -1,44 +1,49 @@
-const faker = require('faker');
 const fs = require('fs');
 const parse = require('csv-parse');
-const algNextStep = require('./algNextStep');
+const minmax = require('./minmax.js');
+const randomNumber = require('./getRandomNumber.js');
 
-const algorytm = () => { 
+const algorytm = () => {
 
 fs.createReadStream(__dirname+'/data.csv')
 .pipe(parse({columns: true}, function (err, results) {
-          // console.log(results);
+          //console.log(results);
+          
         for (i=0; i < HMS; i++) {
             let tmpHM = [];
-            let totalWeight =0;
-            let totalUsefulness=0;
-    
-                for (j=0; totalWeight < maxWeight; j++) {
-        
-                    let iRandom = faker.datatype.number({
-                        'min': 0,
-                        'max': results.length-1});
+            let totalWeight = 0;
+            let totalUsefulness = 0;
 
-                    let iWeight = parseFloat(results[iRandom]['WEIGHT [g]']);
+
+                // losujemy rzeczy - nie mogą przekroczyć max wagi
+                while (totalWeight < maxWeight) {
+                    let iRandom = randomNumber(0,results.length-1);
+                    let iWeight = parseFloat(results[iRandom]['WEIGHT [g]'],2);
                     let iUsefulness = parseInt(results[iRandom]['USEFULNESS [1-100]']);
 
-                    // checking the weight of items
-                    totalWeight = totalWeight + iWeight;
-                    if (totalWeight <= maxWeight) {
-                        tmpHM.push(iRandom);
+                    if ((totalWeight+iWeight) < maxWeight) {
+                        totalWeight = totalWeight + iWeight;
                         totalUsefulness = totalUsefulness + iUsefulness;
-                    } 
-                }
+                        tmpHM.push(iRandom);
+                    } else {
+                        break;
+                    }
+                } 
 
-            HM.push(tmpHM);
+            HM.push(tmpHM);  // zapisuję rozwiązanie w pamięci algorytmu
             FP.push(totalUsefulness);
+            itemsWeight.push(totalWeight.toFixed(2));
             
             console.log(`HM[${i}]:  ${HM[i]}`);
             console.log(`FP[${i}]:  ${FP[i]}`);
+            console.log(`Weight: ${itemsWeight[i]}`);
+            console.log('----');
         }
-        console.log("-------------------------------------------------------------------------------");
-        algNextStep();
-    }));
+    }))
+    .on('end', () => {
+        minmax();
+    });
 }
+
 
 module.exports = algorytm;
