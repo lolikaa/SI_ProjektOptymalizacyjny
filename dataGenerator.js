@@ -1,9 +1,9 @@
 const faker = require('faker');
 const fs = require('fs');
 const path = "data.csv";
-const gotData = require('./app.js');
+//const gotData = require('./app.js');
 
-const dataGenerator = (gotData) => {
+const dataGenerator = () => {
 
  // nazwy do generowania danych //
 const clothes = ['Skirt'
@@ -241,7 +241,7 @@ let records = [];
     .then(() => {
         console.log('...Done. Data generated');
     });
-    gotData();
+    //gotData();
 }
 
 module.exports = dataGenerator;

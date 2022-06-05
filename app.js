@@ -1,7 +1,6 @@
 const fs = require('fs');
 const dataGenerator = require('./dataGenerator.js');
-const algorytm = require('./algorytm.js');
-const algNextStep = require('./algNextStep.js');
+const randomHMmatrix = require('./randomHMmatrix.js');
 const path = "data.csv";
 
 HM =[];                // pamięć algorytmu
@@ -12,15 +11,17 @@ maxWeight = 10000;     //10 kg w gramach
 
 
 if (!fs.existsSync(path)) {  
-  dataGenerator(gotData);
+   
+   async function generateAndGo() {
+      await dataGenerator();
+   }
+   generateAndGo();
+
 } else {
-   algorytmStart();
+   randomHMmatrix();
 }
 
-function algorytmStart() {
-   algorytm();
-   algNextStep();
-}
+
 
 
   

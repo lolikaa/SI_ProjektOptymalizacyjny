@@ -2,12 +2,12 @@ const fs = require('fs');
 const parse = require('csv-parse');
 const minmax = require('./minmax.js');
 const randomNumber = require('./getRandomNumber.js');
+const optimalizationHM = require('./optimalizationHMmatrix.js');
 
-const algorytm = () => {
+const randomHMmatrix = async () => {
 
-fs.createReadStream(__dirname+'/data.csv')
+await fs.createReadStream(__dirname+'/data.csv')
 .pipe(parse({columns: true}, function (err, results) {
-          //console.log(results);
           
         for (i=0; i < HMS; i++) {
             let tmpHM = [];
@@ -43,7 +43,8 @@ fs.createReadStream(__dirname+'/data.csv')
     .on('end', () => {
         minmax();
     });
+   optimalizationHM();
 }
 
 
-module.exports = algorytm;
+module.exports = randomHMmatrix;

@@ -4,7 +4,7 @@ const minmax = require('./minmax.js');
 const randomNumber = require('./getRandomNumber.js');
 
 
-const algNextStep = () => {
+const optimalizationHM =  async () => {
 
     const maxIteracji = 10000;
     const HMCR = 70; //prawdopodobieństwo wystąpienia w %
@@ -12,7 +12,7 @@ const algNextStep = () => {
     let iterArr=[]; let fp0Arr=[]; let fp1Arr=[]; let fp2Arr=[]; let fp3Arr =[]; let fp4Arr=[];
 
 
-    fs.createReadStream(__dirname + '/data.csv')
+    await fs.createReadStream(__dirname + '/data.csv')
         .pipe(parse({ columns: true }, function (err, results) {
 
             for (let i = 0; i < maxIteracji; i++) {
@@ -26,22 +26,23 @@ const algNextStep = () => {
                 let iRandom;
                 
                 // <----------------------------------------- HMCR --------------------------------------------> //   
-                let r1 = randomNumber(0,100);
+                let r1 = randomNumber(1,100);
                 if (r1 < HMCR) { //szukam nowego rozwiązania z pamięci algorytmu HM
 
-                    for (j = 1; j < HM.length; j++) { // sprawdzam ilość kolumn
-                        var longest = HM[0].length;
-                        if (HM[j].length > longest) {longest = HM[j].length;}
-                    }
+                    // max lenght of array in HM matrix
+                        const lengths = HM
+                        .map(a => a.length);
+                        var longest = Math.max(...lengths.values());
 
-                    for (m=0; j < longest-1; j++) {
-                        let lista = [];                   
-                        for(k=0; k < HM.length; k++) {
-                            if( HM[k][m] !== undefined) lista.push(HM[k][m]);
+                    // ------------------------------------------------------------------
+                    // nowe rozwiązanie - bierzemy losowy element z każdej !kolumny!
+                    for (m=0; m < longest-1; m++) {
+                        let columnArray = [];                   
+                        for(k=0; k < HM.length-1; k++) {
+                            if( HM[k][m] !== undefined) columnArray.push(HM[k][m]);
                         }    
-
-                            iRandom = randomNumber(0, lista.length-1);
-                            let item = lista[iRandom];
+                            iRandom = randomNumber(0, columnArray.length-1);
+                            let item = columnArray[iRandom];
 
                             iWeight = parseFloat(results[item]['WEIGHT [g]'],2);
                             iUsefulness = parseInt(results[item]['USEFULNESS [1-100]']);
@@ -51,9 +52,10 @@ const algNextStep = () => {
                                 totalUsefulness = totalUsefulness + iUsefulness;
                                 tmpHM.push(item);
                             } else {
-                                break;
+                               // break;
                             }
                     }
+                    // -----------------------------------------
                     tmpFP.push(totalUsefulness);
                     tmpW.push(totalWeight.toFixed(2));
 
@@ -153,4 +155,4 @@ const algNextStep = () => {
 
 
 
-module.exports = algNextStep;
+module.exports = optimalizationHM;
