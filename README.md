@@ -1,8 +1,10 @@
 # SI_ProjektOptymalizacyjny
+-----------------------------------------------------------------
+Dyskretny problem plecakowy (ang. discrete knapsack problem)
+-----------------------------------------------------------------
 Sztuczna Inteligencja Projekt Optymalizacyjny
 Autor: Monika Gabryś
-numer indeksu: 19103
-3 SN
+
 
 PROBLEM:
 Jak spakować się na wakacje w bagaż podręczny?
