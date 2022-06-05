@@ -20,3 +20,8 @@ Dane:
 --------- nagłówki: ITEM, DESCRIPTION, WEIGHT [g], USEFULLNESS [1-100]
 
 
+Opis algorytmu
+![image](https://user-images.githubusercontent.com/36272145/172055953-19bad890-22a4-477d-9c87-64231cedb1fd.png)
+
+
+
